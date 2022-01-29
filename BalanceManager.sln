@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.32106.194
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceManager.Api", "BalanceManager.Api\BalanceManager.Api.csproj", "{CEB36015-B28B-4D8F-A8D0-F0E7DF71933D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceManager.Application", "BalanceManager.Application\BalanceManager.Application.csproj", "{B9AC5C6B-78C0-4BBA-BDD6-3755879A3811}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceManager.Application", "BalanceManager.Application\BalanceManager.Application.csproj", "{B9AC5C6B-78C0-4BBA-BDD6-3755879A3811}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceManager.Core", "BalanceManager.Core\BalanceManager.Core.csproj", "{353FB662-EF6D-4CC9-8BF6-E1EFB051C313}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceManager.Core", "BalanceManager.Core\BalanceManager.Core.csproj", "{353FB662-EF6D-4CC9-8BF6-E1EFB051C313}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BalanceManager.Infrastructure", "BalanceManager.Infrastructure\BalanceManager.Infrastructure.csproj", "{F0AFB00D-2E7E-426A-8E1A-10F986A6B0F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BalanceManager.Infrastructure", "BalanceManager.Infrastructure\BalanceManager.Infrastructure.csproj", "{F0AFB00D-2E7E-426A-8E1A-10F986A6B0F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

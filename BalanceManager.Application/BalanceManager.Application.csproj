@@ -8,4 +8,10 @@
     <ProjectReference Include="..\BalanceManager.Core\BalanceManager.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="BalanceManager">
+      <HintPath>..\BalanceManager.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

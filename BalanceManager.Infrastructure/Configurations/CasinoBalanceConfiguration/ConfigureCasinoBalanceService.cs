@@ -12,6 +12,5 @@ namespace BalanceManager.Infrastructure.Configurations.CasinoBalanceConfiguratio
 
             return services;
         }
-
     }
 }

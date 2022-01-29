@@ -5,12 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\BalanceManager.Application\BalanceManager.Application.csproj" />
-    <ProjectReference Include="..\BalanceManager.Core\BalanceManager.Core.csproj" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Configurations\" />
+    <ProjectReference Include="..\BalanceManager.Application\BalanceManager.Application.csproj" />
+    <ProjectReference Include="..\BalanceManager.Core\BalanceManager.Core.csproj" />
   </ItemGroup>
 
 </Project>

@@ -24,16 +24,11 @@ namespace BalanceManager.Application.Services
         {
             ErrorCode decreaseCasinoBalance = _gameBalanceManager.DecreaseBalance(amount, transactionId);
 
-            if (decreaseCasinoBalance == ErrorCode.Success)
-            {
-                _casinoBalanceManager.IncreaseBalance(amount, transactionId);
-            }
-            else
-            {
-                return decreaseCasinoBalance;
-            }
+            ErrorCode result = decreaseCasinoBalance == ErrorCode.Success 
+                               ? _casinoBalanceManager.IncreaseBalance(amount, transactionId) 
+                               : decreaseCasinoBalance;
 
-            return _gameBalanceManager.CheckTransaction(transactionId);
+            return result;
         }
     }
 }

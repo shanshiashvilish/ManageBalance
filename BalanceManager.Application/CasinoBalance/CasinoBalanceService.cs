@@ -8,7 +8,7 @@ namespace BalanceManager.Application.Services
         private readonly CasinoBalanceManager _casinoBalanceManager;
         private readonly GameBalanceManager _gameBalanceManager;
 
-        public CasinoBalanceService(CasinoBalanceManager casinoBalanceManager, 
+        public CasinoBalanceService(CasinoBalanceManager casinoBalanceManager,
                                     GameBalanceManager gameBalanceManager)
         {
             _casinoBalanceManager = casinoBalanceManager;
@@ -22,20 +22,15 @@ namespace BalanceManager.Application.Services
 
         public ErrorCode Withdraw(decimal amount, string transactionId)
         {
-            decimal casinoBalance = _casinoBalanceManager.GetBalance();
+            ErrorCode decreaseCasinoBalance = _casinoBalanceManager.DecreaseBalance(amount, transactionId);
 
-            if (casinoBalance > amount)
+            if (decreaseCasinoBalance == ErrorCode.Success)
             {
-                ErrorCode decreaseCasinoBalance = _casinoBalanceManager.DecreaseBalance(amount, transactionId);
-
-                if(decreaseCasinoBalance == ErrorCode.Success)
-                {
-                    _gameBalanceManager.IncreaseBalance(amount, transactionId);
-                }
-                else
-                {
-                    return decreaseCasinoBalance;
-                }
+                _gameBalanceManager.IncreaseBalance(amount, transactionId);
+            }
+            else
+            {
+                return decreaseCasinoBalance;
             }
 
             return _casinoBalanceManager.CheckTransaction(transactionId);

@@ -1,5 +1,4 @@
-﻿
-using Balances;
+﻿using Balances;
 
 namespace BalanceManager.Core.CasinoBalance
 {

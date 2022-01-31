@@ -1,11 +1,12 @@
-﻿using BalanceManager.Core.CasinoBalance;
+﻿using BalanceManager.Api.DataContracts;
+using BalanceManager.Core.CasinoBalance;
 using BalanceManager.Core.GameBalance;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
 namespace BalanceManager.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/")]
     public class BalanceController : Controller
     {
         private readonly IGameBalanceService _gameBalanceService;
@@ -30,7 +31,7 @@ namespace BalanceManager.Api.Controllers
             {
                 decimal result = _casinoBalanceService.GetBalance();
 
-                return Ok(result);
+                return Ok(BalanceDataContract.BuildFrom(result));
             }
             catch (Exception ex)
             {
@@ -51,7 +52,7 @@ namespace BalanceManager.Api.Controllers
 
                 var result = _casinoBalanceService.Withdraw(amount, transactionId);
 
-                return Ok(result);
+                return Ok(WithdrawDataContract.BuildFrom(result));
             }
             catch (Exception ex)
             {
@@ -72,7 +73,7 @@ namespace BalanceManager.Api.Controllers
 
                 var result = _gameBalanceService.Deposit(amount, transactionId);
 
-                return Ok(result);
+                return Ok(DepositDataContract.BuildFrom(result));
             }
             catch (Exception ex)
             {

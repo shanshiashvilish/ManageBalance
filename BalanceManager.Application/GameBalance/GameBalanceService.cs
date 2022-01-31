@@ -17,10 +17,10 @@ namespace BalanceManager.Application.Services
 
         public decimal GetBalance()
         {
-            throw new System.NotImplementedException();
+            return _gameBalanceManager.GetBalance();
         }
 
-        public string Deposit(decimal amount, string transactionId)
+        public ErrorCode Deposit(decimal amount, string transactionId)
         {
             decimal gameBalance = _gameBalanceManager.GetBalance();
 
@@ -34,13 +34,11 @@ namespace BalanceManager.Application.Services
                 }
                 else
                 {
-                    return nameof(decreaseCasinoBalance);
+                    return decreaseCasinoBalance;
                 }
             }
 
-            ErrorCode result = _gameBalanceManager.CheckTransaction(transactionId);
-
-            return nameof(result);
+            return _gameBalanceManager.CheckTransaction(transactionId);
         }
     }
 }

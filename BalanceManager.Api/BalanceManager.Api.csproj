@@ -13,7 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DataContracts\" />
+    <Reference Include="BalanceManager">
+      <HintPath>..\BalanceManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

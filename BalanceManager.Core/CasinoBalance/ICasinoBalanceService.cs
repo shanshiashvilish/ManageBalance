@@ -1,9 +1,11 @@
 ﻿
+using Balances;
+
 namespace BalanceManager.Core.CasinoBalance
 {
     public interface ICasinoBalanceService
     {
         decimal GetBalance();
-        public string Withdraw(decimal amount, string transactionId);
+        public ErrorCode Withdraw(decimal amount, string transactionId);
     }
 }

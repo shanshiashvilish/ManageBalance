@@ -20,7 +20,7 @@ namespace BalanceManager.Application.Services
             return _casinoBalanceManager.GetBalance();
         }
 
-        public string Withdraw(decimal amount, string transactionId)
+        public ErrorCode Withdraw(decimal amount, string transactionId)
         {
             decimal casinoBalance = _casinoBalanceManager.GetBalance();
 
@@ -34,13 +34,11 @@ namespace BalanceManager.Application.Services
                 }
                 else
                 {
-                    return nameof(decreaseCasinoBalance);
+                    return decreaseCasinoBalance;
                 }
             }
 
-            ErrorCode result = _casinoBalanceManager.CheckTransaction(transactionId);
-
-            return nameof(result);
+            return _casinoBalanceManager.CheckTransaction(transactionId);
         }
     }
 }

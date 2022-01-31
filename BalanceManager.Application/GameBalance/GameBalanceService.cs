@@ -1,40 +1,46 @@
 ﻿using BalanceManager.Core.GameBalance;
 using Balances;
-using System;
+
 namespace BalanceManager.Application.Services
 {
     public class GameBalanceService : IGameBalanceService
     {
         private readonly GameBalanceManager _gameBalanceManager;
+        private readonly CasinoBalanceManager _casinoBalanceManager;
 
-        public GameBalanceService(GameBalanceManager gameBalanceManager)
+        public GameBalanceService(GameBalanceManager gameBalanceManager,
+                                  CasinoBalanceManager casinoBalanceManager)
         {
             _gameBalanceManager = gameBalanceManager;
-        }
-
-        public ErrorCode CheckTransaction(string transactionId)
-        {
-            return _gameBalanceManager.CheckTransaction(transactionId);
-        }
-
-        public ErrorCode DecreaseBalance(decimal amount, string transactionId)
-        {
-            return _gameBalanceManager.DecreaseBalance(amount, transactionId);
+            _casinoBalanceManager = casinoBalanceManager;
         }
 
         public decimal GetBalance()
         {
-            return _gameBalanceManager.GetBalance();
+            throw new System.NotImplementedException();
         }
 
-        public ErrorCode IncreaseBalance(decimal amount, string transactionId)
+        public string Deposit(decimal amount, string transactionId)
         {
-            return _gameBalanceManager.IncreaseBalance(amount, transactionId);
-        }
+            decimal gameBalance = _gameBalanceManager.GetBalance();
 
-        public ErrorCode Rollback(string transactionId)
-        {
-            return _gameBalanceManager.Rollback(transactionId);
+            if (gameBalance > amount)
+            {
+                ErrorCode decreaseCasinoBalance = _gameBalanceManager.DecreaseBalance(amount, transactionId);
+
+                if (decreaseCasinoBalance == ErrorCode.Success)
+                {
+                    _casinoBalanceManager.IncreaseBalance(amount, transactionId);
+                }
+                else
+                {
+                    return nameof(decreaseCasinoBalance);
+                }
+            }
+
+            ErrorCode result = _gameBalanceManager.CheckTransaction(transactionId);
+
+            return nameof(result);
         }
     }
 }

@@ -12,4 +12,8 @@
     <ProjectReference Include="..\BalanceManager.Infrastructure\BalanceManager.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="DataContracts\" />
+  </ItemGroup>
+
 </Project>

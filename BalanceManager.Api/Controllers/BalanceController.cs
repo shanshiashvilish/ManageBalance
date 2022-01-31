@@ -1,23 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BalanceManager.Core.CasinoBalance;
+using BalanceManager.Core.GameBalance;
+using Microsoft.AspNetCore.Mvc;
 using System;
-
-using System.Threading.Tasks;
 
 namespace BalanceManager.Api.Controllers
 {
     [Route("api/[controller]")]
     public class BalanceController : Controller
     {
-        [HttpGet("Balance")]
-        public async Task<ActionResult> Balance()
+        private readonly IGameBalanceService _gameBalanceService;
+        private readonly ICasinoBalanceService _casinoBalanceService;
+        private readonly string _fakeTransactionId;
+
+        public BalanceController(IGameBalanceService gameBalanceService, 
+                                 ICasinoBalanceService casinoBalanceService)
+        {
+            _gameBalanceService = gameBalanceService;
+            _casinoBalanceService = casinoBalanceService;
+            _fakeTransactionId = new Guid().ToString();
+        }
+
+        [HttpGet("balance")]
+        public ActionResult Balance()
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             try
             {
+                decimal result = _casinoBalanceService.GetBalance();
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -25,17 +38,20 @@ namespace BalanceManager.Api.Controllers
             }
         }
 
-        [HttpPost("Withdraw")]
-        public async Task<ActionResult> Withdraw(string transactionId, int amount)
+        // Casino >> Game
+        [HttpPost("withdraw/{transactionId}/{amount}")]
+        public ActionResult Withdraw(string transactionId, int amount)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             try
             {
+                transactionId = _fakeTransactionId;
 
+                var result = _casinoBalanceService.Withdraw(amount, transactionId);
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {
@@ -43,25 +59,25 @@ namespace BalanceManager.Api.Controllers
             }
         }
 
-        [HttpPost("Deposit")]
-        public async Task<ActionResult> Deposit(string transactionId, int amount)
+        // Game >> Casino
+        [HttpPost("deposit/{transactionId}/{amount}")]
+        public ActionResult Deposit(string transactionId, int amount)
         {
             if (!ModelState.IsValid)
                 return BadRequest();
 
             try
             {
+                transactionId = _fakeTransactionId;
 
+                var result = _gameBalanceService.Deposit(amount, transactionId);
 
-                return Ok();
+                return Ok(result);
             }
             catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
-
     }
-
-
 }

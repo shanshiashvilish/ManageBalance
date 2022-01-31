@@ -11,14 +11,12 @@ namespace BalanceManager.Api.Controllers
     {
         private readonly IGameBalanceService _gameBalanceService;
         private readonly ICasinoBalanceService _casinoBalanceService;
-        private readonly string _fakeTransactionId;
 
         public BalanceController(IGameBalanceService gameBalanceService, 
                                  ICasinoBalanceService casinoBalanceService)
         {
             _gameBalanceService = gameBalanceService;
             _casinoBalanceService = casinoBalanceService;
-            _fakeTransactionId = new Guid().ToString();
         }
 
         [HttpGet("balance")]
@@ -48,8 +46,6 @@ namespace BalanceManager.Api.Controllers
 
             try
             {
-                transactionId = _fakeTransactionId;
-
                 var result = _casinoBalanceService.Withdraw(amount, transactionId);
 
                 return Ok(WithdrawDataContract.BuildFrom(result));
@@ -69,8 +65,6 @@ namespace BalanceManager.Api.Controllers
 
             try
             {
-                transactionId = _fakeTransactionId;
-
                 var result = _gameBalanceService.Deposit(amount, transactionId);
 
                 return Ok(DepositDataContract.BuildFrom(result));
